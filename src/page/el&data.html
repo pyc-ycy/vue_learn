@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>_el和data的两种写法</title>
+</head>
+<body>
+<div id="app">
+    <p>{{hello}}</p>
+</div>
+<script type="text/javascript" src="../js/vue.js"></script>
+<script type="text/javascript">
+    Vue.config.productionTip = false; /*阻止 vue 在启动时生成生成提示*/
+    new Vue({
+        el: "#app",
+        data: {
+            hello: "hello"
+        }
+    })
+</script>
+</body>
+</html>

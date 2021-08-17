@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Vue 事件绑定</title>
+</head>
+<body>
+<div id="app">
+  <h2>1、双大括号表达式</h2>
+  <p>{{msg}}</p>
+  <p>{{msg.toUpperCase()}}</p>
+  <p v-html="url"></p>
+  <h2>2、指令一：强制数据绑定 </h2>
+  <!--suppress JSUnresolvedVariable -->
+  <img v-bind:src="imgUrl" alt="" width="250px" height="250px"/>
+  <img :src="imgUrl" alt="" width="250px" height="250px">
+  <h2>3、指令二：绑定事件监听 </h2>
+  <button v-on:click="test">test1</button>
+  <button @click="hello">Hello</button>
+  <br>
+  <h2>双向数据绑定</h2>
+  <input v-model:value="text">
+  <pre style="font-size: 16px">
+    v-model 指令只能运用于表单类元素，也即是输入类元素，因为此类元素才有 value 属性。
+    输入类元素有：
+    1）输入框
+    2）单选框
+    3）复选框
+    4）下拉框
+    v-model:value 可以简写成 v-model，因为 v-model 默认收集的就是 value 的值
+  </pre>
+</div>
+<script type="text/javascript" src="../js/vue.js"></script>
+<script type="text/javascript">
+  Vue.config.productionTip = false; /*阻止 vue 在启动时生成生成提示*/
+  new Vue({
+    el: '#app',
+    data: {
+      msg: "Vue is interesting",
+      note: '下面是Vue的标志',
+      text: 'Text',
+      url: '<a href="http://www.baidu.com/">百度一下</a>',
+      imgUrl: 'https://cn.vuejs.org/images/logo.svg'
+    },
+    methods: {
+      test() {
+        alert("单击按钮！")
+      },
+      hello() {
+        alert("Hello World")
+      }
+    }
+  })
+</script>
+</body>
+</html>
