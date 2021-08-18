@@ -11,12 +11,51 @@
 <script type="text/javascript" src="../js/vue.js"></script>
 <script type="text/javascript">
     Vue.config.productionTip = false; /*阻止 vue 在启动时生成生成提示*/
-    new Vue({
-        el: "#app",
+    /*const v = new Vue({
+        //el: "#app",
+        // data 的第一种写法，对象式
         data: {
             hello: "hello"
         }
+    });
+    console.log(v);*/
+    /*使用 Vue 实例来接管容器，效果和使用el接管一样
+    * 但下面这种方式，更为灵活，例如使用定时器延迟接管容器
+    * */
+    /*setTimeout(() => {
+        v.$mount('#app')
+    }, 1000);*/
+    //v.$mount('#app'); // mount 挂载
+    new Vue({
+        el: '#app',
+        // data 的第二种写法，函数式
+        data() {
+            console.log('@@@@', this)   // 此处的 this 为 Vue 实例对象
+            return{
+                hello: "hello"
+            }
+        }
     })
+    /*函数式的data写法，在后面组件相关的代码中是必须使用的
+    * 注意下面
+    * new Vue({
+        el: '#app',
+        // data 的第二种写法，函数式
+        data:() => {
+            console.log('@@@@', this)   // 此处的 this 为 Window 实例对象
+            return{
+                hello: "hello"
+            }
+        }
+    })
+    * 因此data的函数式写法一定要用普通写法，而不是lambda写法，但可以这样写：
+    * data(){
+            console.log('@@@@', this)   // 此处的 this 为 Window 实例对象
+            return{
+                hello: "hello"
+            }
+        }
+    * */
 </script>
 </body>
 </html>
