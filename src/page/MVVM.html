@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>理解Vue的MVVM</title>
+</head>
+<body>
+<!--view-->
+<div id="app">
+    <p>{{hello}}</p>
+    <!--对于 {{}} 这种取值方式，凡是 Vue 实例里有的数据，都能取到-->
+    <h3>{{$options}}</h3>
+    <h3>{{$attrs}}</h3>
+    <h3>{{$el}}</h3>
+    <h3>{{$emit}}</h3>
+    <h3>{{_c}}</h3>
+</div>
+<script type="text/javascript" src="../js/vue.js"></script>
+<script>
+    Vue.config.productionTip = false; /*阻止 vue 在启动时生成生成提示*/
+    /*view model*/
+    const vm = new Vue({
+        el: "#app",
+        /*model*/
+        data: {
+            hello: "hello"
+        }
+    });
+    console.log(vm)
+    /*
+    * MVVM
+    * Model：对于 data 的数据
+    * View：模板
+    * ViewModel：Vue 实例对象，ViewModel 含有 DOM Listener 和 Data Bindings
+    * */
+</script>
+</body>
+</html>
