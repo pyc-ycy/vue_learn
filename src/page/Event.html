@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>事件</title>
+    <style type="text/css">
+        p{
+            text-indent: 2em;
+            width: 1000px;
+        }
+        pre{
+            margin-left: 30px;
+            border: 2px black;
+            width: 800px;
+            font-size: 16px;
+            background: gray;
+            color: black
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <h1>测试 Vue 可以正常使用：{{hello}}</h1>
+    <h2>一、事件的基本使用</h2>
+    <button v-on:click="showInfo">点击我提示信息</button>
+    <button @click="showInfo2('传递了一个字符串', $event)">传递参数</button>
+    <pre>
+    Vue.config.productionTip = false; /*阻止 vue 在启动时生成生成提示*/
+    new Vue({
+        el: "#app",
+        data: {
+            hello: "hello"
+        },
+        methods: {
+            showInfo(){
+                alert("你好！我正在测试 Vue 的事件监听回调。");
+            }
+        },
+        showInfo2(str){
+                //alert("你好！我正在测试 Vue 的事件监听回调。");
+                console.log(str);
+        }
+    })
+    </pre>
+</div>
+<script type="text/javascript" src="../js/vue.js"></script>
+<script type="text/javascript">
+    Vue.config.productionTip = false; /*阻止 vue 在启动时生成生成提示*/
+    new Vue({
+        el: "#app",
+        data: {
+            hello: "hello"
+        },
+        methods: {
+           showInfo(event){
+               console.log(event)
+               console.log(event.target)
+                //alert("你好！我正在测试 Vue 的事件监听回调。");
+            },
+            showInfo2(str, event){
+                //alert("你好！我正在测试 Vue 的事件监听回调。");
+                console.log(str);
+                console.log(event.target.innerText)
+            }
+        }
+    })
+</script>
+</body>
+</html>

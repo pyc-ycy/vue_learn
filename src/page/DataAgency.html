@@ -58,8 +58,31 @@
         }
     });
     </pre>
+    <h2>何为数据代理</h2>
+    <p>
+        数据代理，简单点说，就是<em>通过一个对象，对另一个对象的属性进行读写等操作</em>
+    </p>
+    <p>学校名称：{{school_name}}</p>
+    <p>学校地址：{{_data.school_address}}</p>
+    <p>
+        可以用<strong>vm._data</strong>来获取 data 属性，因此，要修改 data 里面的数据，可以使用<em>vm._data.attribute=value</em>
+        的形式进行修改<br>从数据流来看，有这样的传递关系：<strong>vm_data=options.data=data</strong>
+    </p>
 </div>
 <script type="text/javascript" src="../js/vue.js"></script>
+<!--数据代理-->
+<script type="text/javascript">
+    let obj = {x:100}
+    let obj2 = {y:200}
+    Object.defineProperty(obj2, 'x', {
+        get() {
+            return obj.x;
+        },
+        set(v) {
+          obj.x=v;
+        }
+    })
+</script>
 <script type="text/javascript">
     let number = 18;
     let person = {
@@ -88,10 +111,12 @@
         console.log(person[key]);
     }
     Vue.config.productionTip = false; /*阻止 vue 在启动时生成生成提示*/
-    new Vue({
+    const vm = new Vue({
         el: "#app",
         data: {
-            hello: "hello"
+            hello: "hello",
+            school_name: "互联网大学",
+            school_address: "Internet"
         }
     })
 </script>
