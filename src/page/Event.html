@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <title>事件</title>
     <style type="text/css">
+        *{
+            margin: 20px;
+        }
         p{
             text-indent: 2em;
             width: 1000px;
@@ -15,6 +18,10 @@
             font-size: 16px;
             background: gray;
             color: black
+        }
+        .demo1{
+            height: 200px;
+            background: skyblue;
         }
     </style>
 </head>
@@ -42,6 +49,13 @@
         }
     })
     </pre>
+    <h2>二、事件修饰符</h2>
+    <P>演示阻止超链接的默认新闻</P>
+    <a href="http://www.baidu.com" @click="hype">百度一下</a>
+    <p>阻止事件冒泡</p>
+    <div class="demo1" @click="divShow">
+        <button @click="show">点我提示信息</button>
+    </div>
 </div>
 <script type="text/javascript" src="../js/vue.js"></script>
 <script type="text/javascript">
@@ -52,6 +66,9 @@
             hello: "hello"
         },
         methods: {
+            show(){
+              alert("提示信息");
+            },
            showInfo(event){
                console.log(event)
                console.log(event.target)
@@ -61,6 +78,13 @@
                 //alert("你好！我正在测试 Vue 的事件监听回调。");
                 console.log(str);
                 console.log(event.target.innerText)
+            },
+            hype(event){
+               event.preventDefault();
+               alert("点击确认后超链接不会跳转");
+            },
+            divShow(){
+               alert("你好，我是点击的div触发的");
             }
         }
     })
