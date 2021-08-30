@@ -20,8 +20,16 @@
             color: black
         }
         .demo1{
-            height: 200px;
+            height: 50px;
             background: skyblue;
+        }
+        .box1{
+            padding: 5px;
+            background: skyblue;
+        }
+        .box2{
+            padding: 5px;
+            background: orange;
         }
     </style>
 </head>
@@ -50,12 +58,31 @@
     })
     </pre>
     <h2>二、事件修饰符</h2>
+    <p>prevent：阻止事件的默认行为</p>
     <P>演示阻止超链接的默认新闻</P>
     <a href="http://www.baidu.com" @click="hype">百度一下</a>
-    <p>阻止事件冒泡</p>
+    <p>stop：阻止事件冒泡</p>
     <div class="demo1" @click="divShow">
-        <button @click="show">点我提示信息</button>
+        <button @click.stop="divShow">点我提示信息</button>
     </div>
+    <p>
+        上面的按钮就是一个事件冒泡的例子，要阻止事件冒泡可以用：<strong>event.stopPropagation</strong>，
+        或者利用 Vue 提供的操作 <em>@click.stop</em>
+    </p>
+    <p>once: 事件只触发一次</p>
+    <button @click.once="oneShow">点我提示信息</button>
+
+    <div class="box1" @click.capture="showMsg(1)">
+        div1
+        <div class="box2" @click.self="showMsg(2)">
+            div2
+        </div>
+    </div>
+    <p>self: 只有 event.target 是当前操作的元素的时候才触发事件</p>
+    <div class="demo1" @click.self="selfShow">
+        <button @click="selfShow">点我提示信息</button>
+    </div>
+
 </div>
 <script type="text/javascript" src="../js/vue.js"></script>
 <script type="text/javascript">
@@ -83,8 +110,18 @@
                event.preventDefault();
                alert("点击确认后超链接不会跳转");
             },
-            divShow(){
+            divShow(event){
+                //event.stopPropagation();
                alert("你好，我是点击的div触发的");
+            },
+            oneShow(){
+                alert("只触发一次~~！");
+            },
+            showMsg(msg){
+                console.log(msg)
+            },
+            selfShow(){
+                alert("self 按钮")
             }
         }
     })
